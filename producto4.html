@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft blue babydoll algodón</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos del cuerpo y del carrusel */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            background-image: url('f1.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .producto-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .producto-recuadro {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .descripcion-contenedor {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 500px;
+        }
+
+        .descripcion {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .precio {
+            font-size: 1.5em;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .flecha {
+            cursor: pointer;
+            font-size: 2em;
+            user-select: none;
+            margin: 0 20px;
+            color: #333;
+        }
+
+        .flecha:hover {
+            color: #e91e63;
+        }
+
+        .contenedor-imagen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            max-width: 400px;
+        }
+
+        .botones-talla {
+            margin-top: 20px;
+        }
+
+        .botones-talla button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #e91e63;
+            background-color: white;
+            color: #e91e63;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .botones-talla button:hover {
+            background-color: #e91e63;
+            color: white;
+        }
+
+        .boton-pagar {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .boton-pagar:hover {
+            background-color: #c2185b;
+        }
+
+        img, video {
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .activo {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="producto-container">
+    <div class="producto-recuadro">
+        <div class="contenedor-imagen">
+            <span class="flecha" onclick="cambiarElemento(-1)">&#8249;</span>
+            <img id="imagen-producto" src="l4.jpg" alt="Conjunto negro floral" class="activo">
+            <video id="video-producto" controls></video>
+            <span class="flecha" onclick="cambiarElemento(1)">&#8250;</span>
+        </div>
+        <div class="descripcion-contenedor">
+            <div class="descripcion">
+                <h3>Conjunto negro floral</h3>
+                <p>Disfruta de la suavidad y elegancia con este babydoll de algodón azul suave, diseñado para brindarte comodidad y estilo en cualquier momento.</p>
+                <p class="precio">$700.00</p>
+            </div>
+            <div class="botones-talla">
+                <button>S</button>
+                <button>M</button>
+                <button>L</button>
+                <button>XL</button>
+           </div>
+           <!-- Botón de Pagar con redirección -->
+<button class="boton-pagar" onclick="window.location.href = 'pagos.html';">Pagar</button>
+
+    </div>
+
+</div>
+
+<script>
+    // Lista de elementos con imágenes y un video
+    let elementos = [
+        { tipo: 'imagen', src: 'l4.jpg' },
+        { tipo: 'imagen', src: 'l4.1.jpeg' },
+        { tipo: 'video', src: 'l4.3.mp4' }
+    ];
+    let indiceActual = 0;
+
+    function cambiarElemento(direccion) {
+        // Actualizar índice y ajustar para recorrer el carrusel
+        indiceActual = (indiceActual + direccion + elementos.length) % elementos.length;
+        mostrarElemento();
+    }
+
+    function mostrarElemento() {
+        const imgElemento = document.getElementById('imagen-producto');
+        const videoElemento = document.getElementById('video-producto');
+        const elementoActual = elementos[indiceActual];
+
+        // Cambia entre imagen y video según el tipo
+        if (elementoActual.tipo === 'imagen') {
+            imgElemento.src = elementoActual.src;
+            imgElemento.classList.add('activo');
+            videoElemento.classList.remove('activo');
+            videoElemento.pause();
+        } else if (elementoActual.tipo === 'video') {
+            videoElemento.src = elementoActual.src;
+            videoElemento.classList.add('activo');
+            imgElemento.classList.remove('activo');
+        }
+    }
+
+    // Mostrar el primer elemento al cargar la página
+    mostrarElemento();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('f1.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .pago-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        .pago-container h2 {
+            color: #333;
+        }
+
+        .formulario-pago {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .formulario-pago input {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .formulario-pago .boton-completar {
+            padding: 15px;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .boton-completar[data-loading="true"] {
+            pointer-events: none;
+            background-color: #c2185b;
+            transition: none;
+        }
+
+        .boton-completar[data-loading="true"]::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background-color: #f06292;
+            animation: cargar 2s forwards;
+        }
+
+        @keyframes cargar {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .metodos-pago {
+            margin: 20px 0;
+        }
+
+        .metodos-pago img {
+            width: 50px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="pago-container">
+    <h2>Completar tu pago</h2>
+    <p>Completa los datos para finalizar tu compra.</p>
+
+    <div class="metodos-pago">
+        <img src="visa.png" alt="Visa">
+        <img src="mastercard.png" alt="Mastercard">
+        <img src="amex.png" alt="American Express">
+        <img src="paypal.png" alt="PayPal">
+        <img src="discover.jpg" alt="Discover">
+        <img src="mercadopago.png" alt="Mercado Pago">
+    </div>
+
+    <form class="formulario-pago">
+        <input type="text" id="nombre-tarjeta" placeholder="Nombre en la tarjeta" required>
+        <input type="text" id="numero-tarjeta" placeholder="Número de tarjeta" maxlength="19" required>
+        <input type="text" id="fecha-vencimiento" placeholder="Fecha de vencimiento (MM/AA)" maxlength="5" required>
+        <input type="text" id="codigo-cvv" placeholder="Código de seguridad (CVV)" maxlength="3" required>
+        <button type="button" class="boton-completar" onclick="iniciarPago()">Finalizar Compra</button>
+    </form>
+</div>
+
+<script>
+    const numeroTarjeta = document.getElementById("numero-tarjeta");
+    const fechaVencimiento = document.getElementById("fecha-vencimiento");
+    const botonCompletar = document.querySelector('.boton-completar');
+
+    numeroTarjeta.addEventListener("input", function() {
+        // Formato para número de tarjeta: agrega espacios cada 4 dígitos
+        let valor = numeroTarjeta.value.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim();
+        numeroTarjeta.value = valor;
+    });
+
+    fechaVencimiento.addEventListener("input", function() {
+        // Formato de fecha de vencimiento: MM/AA
+        let valor = fechaVencimiento.value.replace(/\D/g, "");
+        if (valor.length >= 3) {
+            fechaVencimiento.value = valor.slice(0, 2) + "/" + valor.slice(2, 4);
+        } else {
+            fechaVencimiento.value = valor;
+        }
+    });
+
+    function iniciarPago() {
+        // Validación de campos antes de activar el botón
+        const nombre = document.getElementById("nombre-tarjeta").value;
+        const numero = document.getElementById("numero-tarjeta").value;
+        const fecha = document.getElementById("fecha-vencimiento").value;
+        const cvv = document.getElementById("codigo-cvv").value;
+
+        if (nombre && numero.length === 19 && fecha.length === 5 && cvv.length === 3) {
+            botonCompletar.setAttribute('data-loading', 'true');
+            botonCompletar.textContent = "Procesando...";
+            
+            setTimeout(() => {
+                alert("¡Pago realizado exitosamente! Gracias por tu compra. Te llegará una notificación a tu correo.");
+                window.location.href = 'index.html';
+            }, 2000);
+        } else {
+            alert("Por favor, completa todos los campos correctamente.");
+        }
+    }
+</script>
+
+</body>
+</html>

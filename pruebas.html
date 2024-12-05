@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Lencería</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            background-image: url('f1.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Estilo para el rectángulo negro (título y subtítulo) */
+        .rectangulo {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .importacion {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.importacion a {
+    text-decoration: underline;
+    color: #ffffff; /* Cambiado a blanco */
+}
+
+
+
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #ffffff;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        h2 {
+            margin: 10px 0 0;
+            font-family: 'Cormorant Garamond', serif;
+            color: #ffffff;
+            font-size: 2em;
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        /* Estilo para la sección de productos */
+        .productos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .producto {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            width: 220px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s;
+        }
+
+        .producto:hover {
+            transform: translateY(-5px);
+        }
+
+        .producto img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .producto:hover img {
+            transform: scale(1.05);
+        }
+
+        .producto h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #333;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        .producto p {
+            font-size: 1em;
+            color: #777;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        .precio {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #e91e63;
+        }
+
+        /* Estilo para la sección más vendidos */
+        .mas-vendidos {
+            text-align: center;
+        }
+
+        /* Estilo para la sección de otras prendas */
+        .otras-prendas {
+            padding: 10px;
+            margin-top: 20px;
+            text-align: center;
+            border: 2px solid rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            margin: 20px auto;
+            width: fit-content;
+            max-width: 80%;
+        }
+
+        .otras-prendas h3 {
+            margin: 0;
+            font-size: 2em;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        /* Estilo para los productos en Otras Prendas */
+        .otras-prendas-productos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        /* Estilo para la sección Acerca de Nosotros */
+        .acerca-nosotros {
+            padding: 20px;
+            margin: 20px;
+            background-color:rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Estilo para el texto de nosotros */
+        .texto-nosotros {
+            flex: 1.5;
+            text-align: left;
+        }
+
+        /* Estilo para el video */
+        .video-nosotros {
+            flex: 0.7;
+            text-align: right;
+        }
+
+        .video-nosotros video {
+            width: 100%;
+            max-width: 400px; /* Tamaño máximo para no ocupar demasiado espacio */
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .acerca-nosotros h3 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        .acerca-nosotros p {
+            font-size: 1.8em;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+            color: #333; /* Color del texto */
+        }
+
+        /* Estilo para la sección de contacto */
+        .contacto {
+            background-color: #A79A90;
+            color: #ffffff;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            border-radius: 8px;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        .contacto h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        .contacto form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contacto label {
+            font-size: 1.2em;
+            color: #ffffff;
+            font-family: 'Cormorant Garamond', serif; /* Cambiado a Cormorant Garamond */
+            font-weight: 300; /* Cambiado a Light */
+        }
+
+        .contacto input, .contacto textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contacto input[type="submit"] {
+            background-color: #ffffff;
+            color: #A79A90;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contacto input[type="submit"]:hover {
+            background-color: #ddd;
+        }
+
+        /* Mensaje de confirmación */
+        #mensaje-enviado {
+            display: none;
+            color: white;
+            font-size: 1.5em;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+     <!-- Texto Importación en la esquina superior derecha -->
+<div class="importacion">
+    <a href="importacion.html">Importación</a>
+</div>
+
+
+
+    <!-- Rectángulo negro con el título y subtítulo -->
+    <div class="rectangulo">
+        <h1>Encaje y Seda</h1>
+        <h2>Descubre nuestra colección</h2>
+    </div>
+
+    <!-- Sección de productos más vendidos -->
+    <section class="mas-vendidos">
+        <h2>Más Vendidos</h2>
+        <div class="productos">
+            <a href="producto1.html" class="producto">
+                <img src="l1.jpg" alt="Soft blue babydoll algodón">
+                <h3>Soft blue babydoll algodón</h3>
+                <p class="precio">$800.00</p>
+            </a>
+            <a href="producto2.html" class="producto">
+                <img src="l2.jpg" alt="Babydoll Negro">
+                <h3>Babydoll Negro</h3>
+                <p class="precio">$900.00</p>
+            </a>
+            <a href="producto3.html" class="producto">
+                <img src="l3.jpg" alt="Babydoll de encaje negro">
+                <h3>Conjunto floral</h3>
+                <p class="precio">$900.00</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección de otras prendas -->
+    <section class="otras-prendas">
+        <h3>Otras Prendas</h3>
+        <div class="otras-prendas-productos">
+
+            <a href="producto4.html" class="producto">
+                <img src="l4.jpg" alt="Conjunto negro floral ">
+                <h3>Conjunto Floral Negro</h3>
+                <p class="precio">$600.00</p>
+            </a>
+            <a href="producto5.html" class="producto">
+                <img src="l5.jpg" alt="Conjunto transparente">
+                <h3>Conjunto Azul</h3>
+                <p class="precio">$600.00</p>
+            </a>
+            <a href="producto6.html" class="producto">
+                <img src="l6.jpg" alt="Conjunto Blanco">
+                <h3>Conjunto blanco</h3>
+                <p class="precio">$450.00</p>
+            </a>
+</a>
+            <a href="producto7.html" class="producto">
+                <img src="l8.jpg" alt="Conjunto de Encanje Rosa">
+                <h3>Conjunto Azul Flores Blancas</h3>
+                <p class="precio">$500.00</p>
+            </a>
+            <a href="producto8.html" class="producto">
+                <img src="l7.jpg" alt="Conjunto Encaje azul">
+                <h3>Conjunto Azul</h3>
+                <p class="precio">$350.00</p>
+            </a>
+             
+            <a href="producto9.html" class="producto">
+                <img src="l9.jpg" alt="Sujetador negro">
+                <h3>Body Azul</h3>
+                <p class="precio">$400.00</p>
+            </a>
+            </a>
+            <a href="producto10.html" class="producto">
+                <img src="l10.jpg" alt="Conjunto Encaje Rosa">
+                <h3>Conjunto Negro</h3>
+                <p class="precio">$550.00</p>
+            </a>
+            <a href="producto11.html" class="producto">
+                <img src="l11.jpg" alt="Sujetador negro">
+                <h3>Conjunto Negro con Beige</h3>
+                <p class="precio">$400.00</p>
+            </a>
+</a>
+            <a href="producto12.html" class="producto">
+                <img src="l12.jpg" alt="Sujetador negro">
+                <h3>Conjunto de Encaje Rosa </h3>
+                <p class="precio">$400.00</p>
+            </a>
+
+</a>
+            <a href="producto13.html" class="producto">
+                <img src="l13.jpg" alt="Sujetador negro">
+                <h3>Conjunto Beige/Negro</h3>
+                <p class="precio">$400.00</p>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Sección Acerca de Nosotros con texto y video -->
+    <section class="acerca-nosotros">
+        <div class="texto-nosotros">
+            <h3>Sobre Nosotros</h3>
+            <p>En Encaje y Seda, somos una empresa 100% mexicana dedicada a la creación 
+de lencería femenina que combina elegancia, comodidad y diseño exclusivo. Desde nuestra fundación, nos
+ hemos comprometido a ofrecer productos de la más alta calidad, utilizando materiales naturales como 
+el algodón, la seda y encajes finos para garantizar la suavidad y durabilidad de cada prenda.Trabajamos
+ de la mano con talentosos diseñadores mexicanos para crear colecciones que reflejen las últimas tendencias
+ y se adapten a las necesidades y preferencias de cada mujer. Nos enorgullece ofrecer una amplia gama de 
+tallas para que todas nuestras clientas encuentren la prenda perfecta que las haga sentir seguras, cómodas y 
+empoderadas.</p>
+        </div>
+        <div class="video-nosotros">
+            <video src="v2.mp4" controls></video>
+        </div>
+    </section>
+
+    <!-- Sección de contacto -->
+    <section class="contacto">
+        <h3>Contáctanos</h3>
+        <form id="formulario">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" required>
+
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" required></textarea>
+
+            <input type="submit" value="Enviar">
+            <div id="mensaje-enviado">¡Mensaje enviado con éxito!</div>
+        </form>
+    </section>
+
+</body>
+</html>
